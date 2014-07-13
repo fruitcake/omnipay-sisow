@@ -1,0 +1,29 @@
+{
+    "name": "fruitcakestudio/omnipay-sisow",
+    "description": "Sisow gateway for the Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "pay",
+        "payment",
+        "sisow"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Barry vd. Heuvel",
+            "email": "barryvdh@gmail.com"
+        },
+        {
+            "name": "Fruitcake Studio",
+            "homepage": "http://fruitcakestudio.nl"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Omnipay\\Sisow\\" : "src/" }
+    },
+    "require": {
+        "omnipay/common": "~2.2"
+    }
+}
