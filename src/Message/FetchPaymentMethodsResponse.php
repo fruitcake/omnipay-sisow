@@ -8,6 +8,18 @@ use Omnipay\Common\PaymentMethod;
 
 class FetchPaymentMethodsResponse extends AbstractResponse implements FetchPaymentMethodsResponseInterface
 {
+    protected $names = array(
+        'ideal' => 'iDEAL',
+        'ecare' => 'ecare',
+        'ebill' => 'ebill',
+        'overboeking' => 'Overboeking',
+        'sofort' => 'DIRECTebanking/SofortBanking',
+        'mistercash' => 'MisterCash/BanContact',
+        'webshop' => 'WebShop GiftCard',
+        'fijncadeau' => 'FijnCadeau',
+        'podium' => 'Podium Cadeaukaart',
+    );
+
     /**
      * {@inheritdoc}
      */
@@ -25,8 +37,9 @@ class FetchPaymentMethodsResponse extends AbstractResponse implements FetchPayme
 
         if (isset($this->data->merchant->payments)) {
             foreach ($this->data->merchant->payments->payment as $method) {
-                $method = (string)$method;
-                $methods[] = new PaymentMethod($method, $method);
+                $method = (string) $method;
+                $name = isset($this->names[$method]) ? $this->names[$method] : ucfirst($method);
+                $methods[] = new PaymentMethod($method, $name);
             }
         }
 
