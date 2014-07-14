@@ -2,8 +2,6 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Message\RedirectResponseInterface;
-
 class CompletePurchaseResponse extends PurchaseResponse
 {
     /**
@@ -11,9 +9,26 @@ class CompletePurchaseResponse extends PurchaseResponse
      */
     public function isSuccessful()
     {
-        return is_null($this->code);
+        if (isset($this->data->transaction) && isset($this->data->transaction->status)) {
+            if ((string) $this->data->transaction->status == 'Success') {
+                return true;
+            }
+        }
+
+        return false;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getMessage()
+    {
+        if (isset($this->data->transaction) && isset($this->data->transaction->status)) {
+            return (string) $this->data->transaction->status == 'Success';
+        } elseif (!is_null($this->code)) {
+            return $this->data;
+        }
 
-   
+        return null;
+    }
 }
