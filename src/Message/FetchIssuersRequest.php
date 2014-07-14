@@ -21,7 +21,12 @@ class FetchIssuersRequest extends BaseAbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->get($this->endpoint)->send();
+        $endpoint = $this->endpoint;
+        if($this->getTestMode()){
+            $endpoint .= '?test=true';
+        }
+
+        $httpResponse = $this->httpClient->get($endpoint)->send();
 
         return $this->response = new FetchIssuersResponse($this, $httpResponse->xml());
     }
