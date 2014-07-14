@@ -2,11 +2,11 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\AbstractResponse as BaseAbstractResponse;
 use Omnipay\Common\Message\FetchIssuersResponseInterface;
 use Omnipay\Common\Issuer;
 
-class FetchIssuersResponse extends AbstractResponse implements FetchIssuersResponseInterface
+class FetchIssuersResponse extends BaseAbstractResponse implements FetchIssuersResponseInterface
 {
     /**
      * {@inheritdoc}

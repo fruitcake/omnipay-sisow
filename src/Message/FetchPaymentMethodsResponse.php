@@ -2,11 +2,11 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Message\AbstractResponse;
+use Omnipay\Common\Message\AbstractResponse as BaseAbastractResponse;
 use Omnipay\Common\Message\FetchPaymentMethodsResponseInterface;
 use Omnipay\Common\PaymentMethod;
 
-class FetchPaymentMethodsResponse extends AbstractResponse implements FetchPaymentMethodsResponseInterface
+class FetchPaymentMethodsResponse extends BaseAbastractResponse implements FetchPaymentMethodsResponseInterface
 {
     protected $names = array(
         'ideal' => 'iDEAL',

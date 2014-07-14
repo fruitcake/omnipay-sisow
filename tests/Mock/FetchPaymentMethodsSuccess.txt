@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Server: Microsoft-IIS/7.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 14 Jul 2014 15:46:04 GMT
+Content-Length: 421
+
+<?xml version="1.0" encoding="UTF-8"?><checkmerchantresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0"><merchant><active>true</active><merchantid>0123456</merchantid><payments><payment>ideal</payment><payment>sofort</payment><payment>paypalec</payment><payment>overboeking</payment></payments></merchant><signature><sha1>5d01297e06cbafd51a399e8ca7917281e482f8d4</sha1></signature></checkmerchantresponse>

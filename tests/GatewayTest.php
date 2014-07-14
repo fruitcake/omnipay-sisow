@@ -46,9 +46,7 @@ class IdealGatewayTest extends GatewayTestCase
         $this->assertInstanceOf('Omnipay\Sisow\Message\PurchaseRequest', $request);
         $this->assertSame('01', $request->getIssuer());
         $this->assertSame('100.00', $request->getAmount());
-        $this->assertSame('EUR', $request->getCurrency());
         $this->assertSame('desc', $request->getDescription());
-        $this->assertSame('EN', $request->getLanguage());
         $this->assertSame('http://localhost/return', $request->getReturnUrl());
         $this->assertSame('http://localhost/notify', $request->getNotifyUrl());
     }
