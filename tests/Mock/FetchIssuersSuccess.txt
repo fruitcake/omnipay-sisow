@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Server: Microsoft-IIS/7.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 14 Jul 2014 14:18:02 GMT
+Content-Length: 827
+
+<?xml version="1.0" encoding="UTF-8"?><directoryresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0"><directory><issuer><issuerid>01</issuerid><issuername>ABN Amro Bank</issuername></issuer><issuer><issuerid>02</issuerid><issuername>ASN Bank</issuername></issuer><issuer><issuerid>05</issuerid><issuername>ING</issuername></issuer><issuer><issuerid>06</issuerid><issuername>Rabobank</issuername></issuer><issuer><issuerid>07</issuerid><issuername>SNS Bank</issuername></issuer><issuer><issuerid>08</issuerid><issuername>RegioBank</issuername></issuer><issuer><issuerid>09</issuerid><issuername>Triodos Bank</issuername></issuer><issuer><issuerid>10</issuerid><issuername>Van Lanschot Bankiers</issuername></issuer><issuer><issuerid>11</issuerid><issuername>Knab</issuername></issuer></directory></directoryresponse>

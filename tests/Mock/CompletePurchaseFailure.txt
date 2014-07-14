@@ -1,0 +1,10 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Server: Microsoft-IIS/7.0
+X-AspNet-Version: 4.0.30319
+X-Powered-By: ASP.NET
+Date: Mon, 14 Jul 2014 14:27:09 GMT
+Content-Length: 614
+
+<?xml version="1.0" encoding="UTF-8"?><statusresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0"><transaction><trxid>TEST080494972558</trxid><status>Failure</status><amount>1000</amount><purchaseid>T6JKC6Nmv17YPsuw</purchaseid><description>abc</description><entrancecode>T6JKC6Nmv17YPsuw</entrancecode><timestamp>2014-07-14 16:26:51Z</timestamp><consumername></consumername><consumeraccount></consumeraccount><consumercity></consumercity><consumeriban></consumeriban><consumerbic></consumerbic></transaction><signature><sha1>cc322c2bab93fdb9f70a06aad8a07982ee55baa1</sha1></signature></statusresponse>

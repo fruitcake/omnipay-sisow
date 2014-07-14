@@ -19,7 +19,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "fruitcakestudio/omnipay-sisow": "*@dev"
+        "fruitcakestudio/omnipay-sisow": "~2.0@dev"
     }
 }
 ```
