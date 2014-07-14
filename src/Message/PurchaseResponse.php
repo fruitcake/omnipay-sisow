@@ -72,6 +72,15 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
             return (string) $this->data->transaction->purchaseid;
         }
 
+        return $this->getEntranceCode();
+    }
+
+    public function getEntranceCode()
+    {
+        if (isset($this->data->transaction) && isset($this->data->transaction->entrancecode)) {
+            return (string) $this->data->transaction->entrancecode;
+        }
+
         return null;
     }
 }
