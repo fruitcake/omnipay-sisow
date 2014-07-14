@@ -23,12 +23,21 @@ class CompletePurchaseResponse extends PurchaseResponse
      */
     public function getMessage()
     {
-        if (isset($this->data->transaction) && isset($this->data->transaction->status)) {
-            return (string) $this->data->transaction->status == 'Success';
+        if ($status = $this->getStatus()) {
+            return $status;
         } elseif (!is_null($this->code)) {
             return $this->data;
         }
 
+        return null;
+    }
+
+    public function getStatus()
+    {
+        if (isset($this->data->transaction) && isset($this->data->transaction->status)) {
+            return (string) $this->data->transaction->status;
+        }
+        
         return null;
     }
 }
