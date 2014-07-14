@@ -43,9 +43,12 @@ class CompletePurchaseRequest extends PurchaseRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->post($this->endpoint, null, $data)->send();
-
-        return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
+        if($data['trxid']){
+            $httpResponse = $this->httpClient->post($this->endpoint, null, $data)->send();
+            return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
+        }else{
+            $data = array('transaction' => (object) $this->httpRequest->query->all());
+            return $this->response = new CompletePurchaseResponse($this, (object) $data);
+        }
     }
-
 }
