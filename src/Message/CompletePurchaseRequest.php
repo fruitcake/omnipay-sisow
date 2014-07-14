@@ -43,9 +43,7 @@ class CompletePurchaseRequest extends PurchaseRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->get(
-            $this->endpoint . '?' .http_build_query($data)
-        )->send();
+        $httpResponse = $this->httpClient->post($this->endpoint, null, $data)->send();
 
         return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
     }
