@@ -36,4 +36,13 @@ abstract class AbstractRequest extends BaseAbstractRequest
         return $this->setParameter('merchantKey', $value);
     }
 
+    public function getShopId()
+    {
+        return $this->getParameter('shopId');
+    }
+
+    public function setShopId($value)
+    {
+        return $this->setParameter('shopId', $value);
+    }
 }

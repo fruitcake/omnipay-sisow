@@ -48,6 +48,16 @@ class Gateway extends AbstractGateway
         return $this->setParameter('merchantId', $value);
     }
 
+    public function getShopId()
+    {
+        return $this->getParameter('shopId');
+    }
+
+    public function setShopId($value)
+    {
+        return $this->setParameter('shopId', $value);
+    }
+
     /**
      * Retrieve iDEAL issuers.
      *

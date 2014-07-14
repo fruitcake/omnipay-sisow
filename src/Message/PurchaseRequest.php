@@ -60,6 +60,7 @@ class PurchaseRequest extends AbstractRequest
         );
 
         $data = array(
+            'shopid'        => $this->getShopId(),
             'merchantid'    => $this->getMerchantId(),
             'merchantkey'   => $this->getMerchantKey(),
             'payment'       => $this->getPaymentMethod(),

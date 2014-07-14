@@ -24,6 +24,7 @@ class CompletePurchaseRequest extends PurchaseRequest
         $this->validate('merchantId', 'merchantKey');
 
         $data = array(
+            'shopid'        => $this->getShopId(),
             'merchantid'    => $this->getMerchantId(),
             'merchantkey'   => $this->getMerchantKey(),
             'trxid'         => $this->getTransactionReference(),
