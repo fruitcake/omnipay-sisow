@@ -8,7 +8,25 @@ namespace Omnipay\Sisow\Message;
 class PurchaseRequest extends AbstractRequest
 {
     protected $endpoint = 'https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/TransactionRequest';
-    
+
+    public function getDays()
+    {
+        return $this->getParameter('days');
+    }
+
+    public function setDays($value){
+        return $this->setParameter('days', $value);
+    }
+
+    public function getBillingMail()
+    {
+        return $this->getParameter('billing_mail');
+    }
+
+    public function setBillingMail($value){
+        return $this->setParameter('billing_mail', $value);
+    }
+
     public function getEntranceCode()
     {
         return $this->getParameter('entranceCode') ?: $this->getTransactionId();
@@ -55,6 +73,8 @@ class PurchaseRequest extends AbstractRequest
             'notifyurl'     => $this->getNotifyUrl(),
             'sha1'          => $this->generateSignature(),
             'testmode'      => $this->getTestMode(),
+            'billing_mail'  => $this->getBillingMail(),
+            'days'          => $this->getDays(),
         );
 
         return $data;
