@@ -36,8 +36,60 @@ The following gateways are provided by this package:
 * Sisow
 
 For general usage instructions, please see the main [Omnipay](https://github.com/omnipay/omnipay)
-repository.
+repository. See also the [Sisow REST Documentation](http://www.sisow.nl/downloads/REST321.pdf)
 
+## Example
+
+     $gateway = \Omnipay\Omnipay::create('Sisow');
+        $gateway->initialize(array(
+            'shopId' => '',
+            'merchantId' => '0123456',
+            'merchantKey' => 'b36d8259346eaddb3c03236b37ad3a1d7a67cec6',
+        ));
+
+        // Start the purchase
+        if(!isset($_GET['trxid'])){
+            $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+            $response = $gateway->purchase(array(
+                'amount' => "6.84",
+                'description' => "Testorder #1234",
+                // 'issuer' => $issuerId,               // Leave empty to choose
+                // 'payment' => 'overboeking'           // Leave empty for iDeal
+                // 'mail' => 'barry@fruitcakestudio.nl',
+                // 'days' => 14,                        // mail/days or for overboeking
+                'transactionId' => 1234,
+                'returnUrl' => $url,
+                'notifyUrl' => $url,
+            ))->send();
+
+            if ($response->isRedirect()) {
+                // redirect to offsite payment gateway
+                $response->redirect();
+            } elseif ($response->isPending()) {
+                // Process started (for example, 'overboeking')
+                return "Pending, Reference: ". $response->getTransactionReference();
+            } else {
+                // payment failed: display message to customer
+                return "Error " .$response->getCode() . ': ' . $response->getMessage();
+            }
+        }else{
+            // Check the status
+            $response = $gateway->completePurchase()->send();
+            if($response->isSuccessful()){
+                $reference = $response->getTransactionReference();  // TODO; Check the reference/id with your database
+                return "Transaction '" . $response->getTransactionId() . "' succeeded!";
+            }else{
+                return "Error " .$response->getCode() . ': ' . $response->getMessage();
+            }
+        }
+        
+**Note, transactionReference is only available in the PurchaseResponse when an `issuer` is set. Use the fetchIssuers response to see the available issuers, or use the [Javascript script](https://www.sisow.nl/Sisow/iDeal/issuers.js) to fill the issuers**
+
+    $response = Omnipay::fetchIssuers()->send();
+    if($response->isSuccessful()){
+        print_r($response->getIssuers());
+    }
+        
 ## Support
 
 If you are having general issues with Omnipay, we suggest posting on
