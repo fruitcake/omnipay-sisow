@@ -14,7 +14,8 @@ class PurchaseRequest extends AbstractRequest
         return $this->getParameter('days');
     }
 
-    public function setDays($value){
+    public function setDays($value)
+    {
         return $this->setParameter('days', $value);
     }
 
@@ -23,7 +24,8 @@ class PurchaseRequest extends AbstractRequest
         return $this->getParameter('billing_mail');
     }
 
-    public function setBillingMail($value){
+    public function setBillingMail($value)
+    {
         return $this->setParameter('billing_mail', $value);
     }
 
@@ -43,7 +45,8 @@ class PurchaseRequest extends AbstractRequest
     protected function generateSignature()
     {
         return sha1(
-            $this->getTransactionId() . $this->getEntranceCode() . $this->getAmountInteger() . $this->getMerchantId() . $this->getMerchantKey()
+            $this->getTransactionId() . $this->getEntranceCode() .
+            $this->getAmountInteger() . $this->getMerchantId() . $this->getMerchantKey()
         );
     }
 

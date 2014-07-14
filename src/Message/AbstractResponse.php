@@ -49,5 +49,4 @@ abstract class AbstractResponse extends BaseAbstractResponse
 
         return null;
     }
-
 }

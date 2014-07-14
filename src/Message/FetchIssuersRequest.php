@@ -22,7 +22,7 @@ class FetchIssuersRequest extends BaseAbstractRequest
     public function sendData($data)
     {
         $endpoint = $this->endpoint;
-        if($this->getTestMode()){
+        if ($this->getTestMode()) {
             $endpoint .= '?test=true';
         }
 
