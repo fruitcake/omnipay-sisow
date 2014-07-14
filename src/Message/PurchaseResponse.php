@@ -11,6 +11,11 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
      */
     public function isSuccessful()
     {
+        // For 'overboeking', a documentid is returned directly.
+        if(isset($this->data->transaction) && isset($this->data->transaction->documentid) && $this->data->transaction->documentid){
+            return true;
+        }
+
         return false;
     }
 
@@ -79,6 +84,24 @@ class PurchaseResponse extends AbstractResponse implements RedirectResponseInter
     {
         if (isset($this->data->transaction) && isset($this->data->transaction->entrancecode)) {
             return (string) $this->data->transaction->entrancecode;
+        }
+
+        return null;
+    }
+
+    public function getDocumentId()
+    {
+        if (isset($this->data->transaction) && isset($this->data->transaction->documentid)) {
+            return (string) $this->data->transaction->documentid;
+        }
+
+        return null;
+    }
+
+    public function getDocumentUrl()
+    {
+        if (isset($this->data->transaction) && isset($this->data->transaction->documenturl)) {
+            return urldecode($this->data->transaction->documenturl);
         }
 
         return null;
