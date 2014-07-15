@@ -54,13 +54,14 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
             $response = $gateway->purchase(array(
                 'amount' => "6.84",
                 'description' => "Testorder #1234",
-                'issuer' => $issuerId,                  // Get the id from the issuers list.
-                // For 'overboeking', extra parameters are required:
-                // 'payment' => 'overboeking'           
-                // 'billing_mail' => 'barry@fruitcakestudio.nl',
-                // 'billing_firstname' => 'Barry',       //optional
-                // 'billing_lastname' => 'vd. Heuvel',  //optional
-                // 'days' => 14,                        // mail/days or for overboeking
+                'issuer' => 99,                         // Get the id from the issuers list, 99 = test issuer
+                //'paymentMethod' => 'overboeking',     // For 'overboeking', extra parameters are required:
+                'card' => array(
+                    'email' => 'barry@fruitcakestudio.nl',
+                    'firstName' => 'Barry',
+                    'lastName' => 'vd. Heuvel',
+                    'company' => 'Fruitcake Studio',
+                ),
                 'transactionId' => 1234,
                 'returnUrl' => $url,
                 'notifyUrl' => $url,
@@ -93,6 +94,11 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
     if($response->isSuccessful()){
         print_r($response->getIssuers());
     }
+    
+The billing/shipping data are set with the `card` parameter, with an array or [CreditCard object](https://github.com/omnipay/omnipay#credit-card--payment-form-input).
+Other parameters that can be entered with 'overboeking' are:
+    * including (true/false to include a link to pay with ideal
+    * days (number of days before a reminder is sent)
         
 ## Support
 

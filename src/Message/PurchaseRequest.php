@@ -19,14 +19,14 @@ class PurchaseRequest extends AbstractRequest
         return $this->setParameter('days', $value);
     }
 
-    public function getBillingMail()
+    public function getIncluding()
     {
-        return $this->getParameter('billing_mail');
+        return $this->getParameter('including');
     }
 
-    public function setBillingMail($value)
+    public function setIncluding($value)
     {
-        return $this->setParameter('billing_mail', $value);
+        return $this->setParameter('including', $value);
     }
 
     public function getEntranceCode()
@@ -72,14 +72,47 @@ class PurchaseRequest extends AbstractRequest
             'issuerid'      => $this->getIssuer(),
             'entrancecode'  => $this->getEntranceCode(),
             'description'   => $this->getDescription(),
+            'including'     => $this->getIncluding(),
+            'days'          => $this->getDays(),
             'returnurl'     => $this->getReturnUrl(),
             'cancelurl'     => $this->getCancelUrl(),
             'notifyurl'     => $this->getNotifyUrl(),
             'sha1'          => $this->generateSignature(),
             'testmode'      => $this->getTestMode(),
-            'billing_mail'  => $this->getBillingMail(),
-            'days'          => $this->getDays(),
         );
+
+        /** @var \Omnipay\Common\CreditCard $card */
+        $card = $this->getCard();
+        if ($card) {
+            if ($this->getPaymentMethod() == 'overboeking' || $this->getPaymentMethod() == 'ecare') {
+                $data['billing_mail']       = $card->getEmail();
+                $data['billing_firstname']  = $card->getBillingFirstName();
+                $data['billing_lastname']   = $card->getBillingLastName();
+            }
+
+            if ($this->getPaymentMethod() == 'ecare') {
+                $data['billing_company']    = $card->getBillingCompany();
+                $data['billing_address1']   = $card->getBillingAddress1();
+                $data['billing_address2']   = $card->getBillingAddress2();
+                $data['billing_zip']        = $card->getBillingPostcode();
+                $data['billing_city']       = $card->getBillingCity();
+                $data['billing_country']    = $card->getBillingCountry();
+                $data['billing_phone']      = $card->getBillingPhone();
+            }
+
+            if ($this->getPaymentMethod() == 'esend') {
+                $data['shipping_mail']       = $card->getEmail();
+                $data['shipping_firstname']  = $card->getShippingFirstName();
+                $data['shipping_lastname']   = $card->getShippingLastName();
+                $data['shipping_company']    = $card->getShippingCompany();
+                $data['shipping_address1']   = $card->getShippingAddress1();
+                $data['shipping_address2']   = $card->getShippingAddress2();
+                $data['shipping_zip']        = $card->getShippingPostcode();
+                $data['shipping_city']       = $card->getShippingCity();
+                $data['shipping_country']    = $card->getShippingCountry();
+                $data['shipping_phone']      = $card->getShippingPhone();
+            }
+        }
 
         return $data;
     }
