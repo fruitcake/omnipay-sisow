@@ -2,6 +2,8 @@
 
 namespace Omnipay\Sisow\Message;
 
+use Omnipay\Common\Exception\InvalidRequestException;
+
 /**
  * Sisow Purchase Request
  */
@@ -61,6 +63,10 @@ class PurchaseRequest extends AbstractRequest
             'returnUrl',
             'notifyUrl'
         );
+
+        if (!$this->getTestMode() && $this->getIssuer() == 99) {
+            throw new InvalidRequestException("The issuer can only be '99' in testMode!");
+        }
 
         $data = array(
             'shopid'        => $this->getShopId(),
