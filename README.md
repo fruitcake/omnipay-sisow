@@ -40,6 +40,7 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
 
 ## Example
 
+```php
      $gateway = \Omnipay\Omnipay::create('Sisow');
         $gateway->initialize(array(
             'shopId' => '',
@@ -87,13 +88,16 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
                 return "Error " .$response->getCode() . ': ' . $response->getMessage();
             }
         }
-        
+```
+
 **Note, transactionReference is only available in the PurchaseResponse when an `issuer` is set. Use the fetchIssuers response to see the available issuers, or use the [Javascript script](https://www.sisow.nl/Sisow/iDeal/issuers.js) to fill the issuers**
 
+```php
     $response = Omnipay::fetchIssuers()->send();
     if($response->isSuccessful()){
         print_r($response->getIssuers());
     }
+```    
     
 The billing/shipping data are set with the `card` parameter, with an array or [CreditCard object](https://github.com/omnipay/omnipay#credit-card--payment-form-input).
 Other parameters that can be entered with 'overboeking' are:
