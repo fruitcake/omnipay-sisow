@@ -41,62 +41,62 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
 ## Example
 
 ```php
-     $gateway = \Omnipay\Omnipay::create('Sisow');
-        $gateway->initialize(array(
-            'shopId' => '',
-            'merchantId' => '0123456',
-            'merchantKey' => 'b36d8259346eaddb3c03236b37ad3a1d7a67cec6',
-            'testMode' => true,
-        ));
+ $gateway = \Omnipay\Omnipay::create('Sisow');
+    $gateway->initialize(array(
+        'shopId' => '',
+        'merchantId' => '0123456',
+        'merchantKey' => 'b36d8259346eaddb3c03236b37ad3a1d7a67cec6',
+        'testMode' => true,
+    ));
 
-        // Start the purchase
-        if(!isset($_GET['trxid'])){
-            $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
-            $response = $gateway->purchase(array(
-                'amount' => "6.84",
-                'description' => "Testorder #1234",
-                'issuer' => 99,                         // Get the id from the issuers list, 99 = test issuer
-                //'paymentMethod' => 'overboeking',     // For 'overboeking', extra parameters are required:
-                'card' => array(
-                    'email' => 'barry@fruitcakestudio.nl',
-                    'firstName' => 'Barry',
-                    'lastName' => 'vd. Heuvel',
-                    'company' => 'Fruitcake Studio',
-                ),
-                'transactionId' => 1234,
-                'returnUrl' => $url,
-                'notifyUrl' => $url,
-            ))->send();
+    // Start the purchase
+    if(!isset($_GET['trxid'])){
+        $url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+        $response = $gateway->purchase(array(
+            'amount' => "6.84",
+            'description' => "Testorder #1234",
+            'issuer' => 99,                         // Get the id from the issuers list, 99 = test issuer
+            //'paymentMethod' => 'overboeking',     // For 'overboeking', extra parameters are required:
+            'card' => array(
+                'email' => 'barry@fruitcakestudio.nl',
+                'firstName' => 'Barry',
+                'lastName' => 'vd. Heuvel',
+                'company' => 'Fruitcake Studio',
+            ),
+            'transactionId' => 1234,
+            'returnUrl' => $url,
+            'notifyUrl' => $url,
+        ))->send();
 
-            if ($response->isRedirect()) {
-                // redirect to offsite payment gateway
-                $response->redirect();
-            } elseif ($response->isPending()) {
-                // Process started (for example, 'overboeking')
-                return "Pending, Reference: ". $response->getTransactionReference();
-            } else {
-                // payment failed: display message to customer
-                return "Error " .$response->getCode() . ': ' . $response->getMessage();
-            }
-        }else{
-            // Check the status
-            $response = $gateway->completePurchase()->send();
-            if($response->isSuccessful()){
-                $reference = $response->getTransactionReference();  // TODO; Check the reference/id with your database
-                return "Transaction '" . $response->getTransactionId() . "' succeeded!";
-            }else{
-                return "Error " .$response->getCode() . ': ' . $response->getMessage();
-            }
+        if ($response->isRedirect()) {
+            // redirect to offsite payment gateway
+            $response->redirect();
+        } elseif ($response->isPending()) {
+            // Process started (for example, 'overboeking')
+            return "Pending, Reference: ". $response->getTransactionReference();
+        } else {
+            // payment failed: display message to customer
+            return "Error " .$response->getCode() . ': ' . $response->getMessage();
         }
+    }else{
+        // Check the status
+        $response = $gateway->completePurchase()->send();
+        if($response->isSuccessful()){
+            $reference = $response->getTransactionReference();  // TODO; Check the reference/id with your database
+            return "Transaction '" . $response->getTransactionId() . "' succeeded!";
+        }else{
+            return "Error " .$response->getCode() . ': ' . $response->getMessage();
+        }
+    }
 ```
 
 **Note, transactionReference is only available in the PurchaseResponse when an `issuer` is set. Use the fetchIssuers response to see the available issuers, or use the [Javascript script](https://www.sisow.nl/Sisow/iDeal/issuers.js) to fill the issuers**
 
 ```php
-    $response = Omnipay::fetchIssuers()->send();
-    if($response->isSuccessful()){
-        print_r($response->getIssuers());
-    }
+$response = Omnipay::fetchIssuers()->send();
+if($response->isSuccessful()){
+    print_r($response->getIssuers());
+}
 ```    
     
 The billing/shipping data are set with the `card` parameter, with an array or [CreditCard object](https://github.com/omnipay/omnipay#credit-card--payment-form-input).
