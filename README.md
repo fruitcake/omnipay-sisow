@@ -45,6 +45,7 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
             'shopId' => '',
             'merchantId' => '0123456',
             'merchantKey' => 'b36d8259346eaddb3c03236b37ad3a1d7a67cec6',
+            'testMode' => true,
         ));
 
         // Start the purchase
@@ -53,9 +54,12 @@ repository. See also the [Sisow REST Documentation](http://www.sisow.nl/download
             $response = $gateway->purchase(array(
                 'amount' => "6.84",
                 'description' => "Testorder #1234",
-                // 'issuer' => $issuerId,               // Leave empty to choose
-                // 'payment' => 'overboeking'           // Leave empty for iDeal
-                // 'mail' => 'barry@fruitcakestudio.nl',
+                'issuer' => $issuerId,                  // Get the id from the issuers list.
+                // For 'overboeking', extra parameters are required:
+                // 'payment' => 'overboeking'           
+                // 'billing_mail' => 'barry@fruitcakestudio.nl',
+                // 'billing_firstname' => 'Barry',       //optional
+                // 'billing_lastname' => 'vd. Heuvel',  //optional
                 // 'days' => 14,                        // mail/days or for overboeking
                 'transactionId' => 1234,
                 'returnUrl' => $url,
