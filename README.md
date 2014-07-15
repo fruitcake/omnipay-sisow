@@ -101,8 +101,9 @@ if($response->isSuccessful()){
     
 The billing/shipping data are set with the `card` parameter, with an array or [CreditCard object](https://github.com/omnipay/omnipay#credit-card--payment-form-input).
 Other parameters that can be entered with 'overboeking' are:
-    * including (true/false to include a link to pay with ideal
-    * days (number of days before a reminder is sent)
+
+ - `including` (true/false to include a link to pay with ideal
+ - `days` (number of days before a reminder is sent)
         
 ## Support
 
