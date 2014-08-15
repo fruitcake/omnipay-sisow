@@ -2,8 +2,6 @@
 
 **Sisow gateway for the Omnipay PHP payment processing library**
 
-**Alpha version, API might change and not everyone could work as expected. Please test before using in production! Please report any issues on Github**
-
 [![Build Status](https://travis-ci.org/fruitcakestudio/omnipay-sisow.png?branch=master)](https://travis-ci.org/fruitcakestudio/omnipay-sisow)
 [![Latest Stable Version](https://poser.pugx.org/fruitcakestudio/omnipay-sisow/version.png)](https://packagist.org/packages/fruitcakestudio/omnipay-sisow)
 [![Total Downloads](https://poser.pugx.org/fruitcakestudio/omnipay-sisow/d/total.png)](https://packagist.org/packages/fruitcakestudio/omnipay-sisow)
@@ -19,7 +17,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "fruitcakestudio/omnipay-sisow": "~2.0@dev"
+        "fruitcakestudio/omnipay-sisow": "~2.0"
     }
 }
 ```
