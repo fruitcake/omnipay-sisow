@@ -37,6 +37,7 @@ class CompletePurchaseRequestTest extends TestCase
         $response = $this->request->send();
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isRedirect());
     }
 
     public function testSendFailure()
