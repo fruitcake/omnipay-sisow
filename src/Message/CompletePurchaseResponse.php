@@ -4,6 +4,11 @@ namespace Omnipay\Sisow\Message;
 
 class CompletePurchaseResponse extends PurchaseResponse
 {
+    public function isRedirect()
+    {
+        return false;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +42,7 @@ class CompletePurchaseResponse extends PurchaseResponse
         if (isset($this->data->transaction) && isset($this->data->transaction->status)) {
             return (string) $this->data->transaction->status;
         }
-        
+
         return null;
     }
 }
