@@ -86,8 +86,7 @@ class PurchaseRequest extends AbstractRequest
      */
     protected function generateSignature()
     {
-        if($this->getPaymentMethod() == 'klarna')
-        {
+        if ($this->getPaymentMethod() == 'klarna') {
             return sha1(
                 $this->getTransactionId() . $this->getEntranceCode() . $this->getAmountInteger() .
                 $this->getShopId() . $this->getMerchantId() . $this->getMerchantKey()
@@ -111,66 +110,68 @@ class PurchaseRequest extends AbstractRequest
             'notifyUrl'
         );
 
-        if (!$this->getTestMode() && $this->getIssuer() == 99) {
+        if ( ! $this->getTestMode() && $this->getIssuer() == 99) {
             throw new InvalidRequestException("The issuer can only be '99' in testMode!");
         }
 
         $data = array(
-            'shopid'        => $this->getShopId(),
-            'merchantid'    => $this->getMerchantId(),
-            'merchantkey'   => $this->getMerchantKey(),
-            'payment'       => $this->getPaymentMethod(),
-            'purchaseid'    => $this->getTransactionId(),
-            'amount'        => $this->getAmountInteger(),
-            'issuerid'      => $this->getIssuer(),
-            'entrancecode'  => $this->getEntranceCode(),
-            'description'   => $this->getDescription(),
-            'including'     => $this->getIncluding(),
-            'days'          => $this->getDays(),
-            'returnurl'     => $this->getReturnUrl(),
-            'cancelurl'     => $this->getCancelUrl(),
-            'notifyurl'     => $this->getNotifyUrl(),
-            'sha1'          => $this->generateSignature(),
-            'testmode'      => $this->getTestMode(),
+            'shopid' => $this->getShopId(),
+            'merchantid' => $this->getMerchantId(),
+            'merchantkey' => $this->getMerchantKey(),
+            'payment' => $this->getPaymentMethod(),
+            'purchaseid' => $this->getTransactionId(),
+            'amount' => $this->getAmountInteger(),
+            'issuerid' => $this->getIssuer(),
+            'entrancecode' => $this->getEntranceCode(),
+            'description' => $this->getDescription(),
+            'including' => $this->getIncluding(),
+            'days' => $this->getDays(),
+            'returnurl' => $this->getReturnUrl(),
+            'cancelurl' => $this->getCancelUrl(),
+            'notifyurl' => $this->getNotifyUrl(),
+            'sha1' => $this->generateSignature(),
+            'testmode' => $this->getTestMode(),
         );
 
         /** @var \Omnipay\Common\CreditCard $card */
         $card = $this->getCard();
         if ($card) {
             if ($this->getPaymentMethod() == 'overboeking' || $this->getPaymentMethod() == 'klarna') {
-                $data['billing_mail']       = $card->getEmail();
-                $data['billing_firstname']  = $card->getBillingFirstName();
-                $data['billing_lastname']   = $card->getBillingLastName();
+                $data['billing_mail'] = $card->getEmail();
+                $data['billing_firstname'] = $card->getBillingFirstName();
+                $data['billing_lastname'] = $card->getBillingLastName();
             }
 
             if ($this->getPaymentMethod() == 'klarna') {
-                $data['billing_company']        = $card->getBillingCompany();
-                $data['billing_address1']       = $card->getBillingAddress1();
-                $data['billing_address2']       = $card->getBillingAddress2();
-                $data['billing_zip']            = $card->getBillingPostcode();
-                $data['billing_city']           = $card->getBillingCity();
-                $data['billing_country']        = $card->getBillingCountry();
-                $data['billing_phone']          = $card->getBillingPhone();
-                $data['birthdate']              = date('dmY', strtotime($card->getBirthday()));
-                $data['pclass']                 = -1; // only used for klarna account, but required for klarna invoice aswell.
-                $data['makeinvoice']            = $this->getMakeInvoice();
-                $data['mailinvoice']            = $this->getMailInvoice();
-                $data['billing_countrycode']     = $this->getBillingCountrycode();
-                $data['shipping_countrycode']    = $this->getShippingCountrycode();
+                $data['billing_company'] = $card->getBillingCompany();
+                $data['billing_address1'] = $card->getBillingAddress1();
+                $data['billing_address2'] = $card->getBillingAddress2();
+                $data['billing_zip'] = $card->getBillingPostcode();
+                $data['billing_city'] = $card->getBillingCity();
+                $data['billing_country'] = $card->getBillingCountry();
+                $data['billing_phone'] = $card->getBillingPhone();
+                $data['birthdate'] = date('dmY', strtotime($card->getBirthday()));
+                $data['makeinvoice'] = $this->getMakeInvoice();
+                $data['mailinvoice'] = $this->getMailInvoice();
+                $data['billing_countrycode'] = $this->getBillingCountrycode();
+                $data['shipping_countrycode'] = $this->getShippingCountrycode();
+
+                // only used for klarna account (required for klarna invoice as -1)
+                $data['pclass'] = - 1;
 
                 $data = array_merge($data, $this->getItemData());
             }
 
-            $data['shipping_mail']       = $card->getEmail();
-            $data['shipping_firstname']  = $card->getShippingFirstName();
-            $data['shipping_lastname']   = $card->getShippingLastName();
-            $data['shipping_company']    = $card->getShippingCompany();
-            $data['shipping_address1']   = $card->getShippingAddress1();
-            $data['shipping_address2']   = $card->getShippingAddress2();
-            $data['shipping_zip']        = $card->getShippingPostcode();
-            $data['shipping_city']       = $card->getShippingCity();
-            $data['shipping_country']    = $card->getShippingCountry();
-            $data['shipping_phone']      = $card->getShippingPhone();
+            $data['shipping_mail'] = $card->getEmail();
+            $data['shipping_firstname'] = $card->getShippingFirstName();
+            $data['shipping_lastname'] = $card->getShippingLastName();
+            $data['shipping_company'] = $card->getShippingCompany();
+            $data['shipping_address1'] = $card->getShippingAddress1();
+            $data['shipping_address2'] = $card->getShippingAddress2();
+            $data['shipping_zip'] = $card->getShippingPostcode();
+            $data['shipping_city'] = $card->getShippingCity();
+            $data['shipping_country'] = $card->getShippingCountry();
+            $data['shipping_phone'] = $card->getShippingPhone();
         }
 
         return $data;
@@ -181,18 +182,20 @@ class PurchaseRequest extends AbstractRequest
         $data = array();
         $items = $this->getItems();
 
-        if ($items)
-        {
-            foreach ($items as $i => $item)
-            {
-                $data['product_id_'.$i] = $item->getName();
-                $data['product_description_'.$i] = $item->getDescription();
-                $data['product_quantity_'.$i] = $item->getQuantity();
-                $data['product_netprice_'.$i] = ceil($this->formatCurrency($item->getPrice()) * 100);
-                $data['product_total_'.$i] = ceil($this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100);
-                $data['product_nettotal_'.$i] = ceil(($this->formatCurrency($item->getPrice())/121*100) * $item->getQuantity() * 100); //@todo fix tax rates
-                $data['product_tax_'.$i] = ceil(($this->formatCurrency($item->getPrice())/121*21) * 100);
-                $data['product_taxrate_'.$i] = 21 * 100;
+        if ($items) {
+            foreach ($items as $i => $item) {
+                $data['product_id_' . $i] = $item->getName();
+                $data['product_description_' . $i] = $item->getDescription();
+                $data['product_quantity_' . $i] = $item->getQuantity();
+                $data['product_netprice_' . $i] = ceil($this->formatCurrency($item->getPrice()) * 100);
+                $data['product_total_' . $i] = ceil(
+                    $this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100
+                );
+                $data['product_nettotal_' . $i] = ceil(
+                    ($this->formatCurrency($item->getPrice()) / 121 * 100) * $item->getQuantity() * 100
+                ); //@todo fix tax rates
+                $data['product_tax_' . $i] = ceil(($this->formatCurrency($item->getPrice()) / 121 * 21) * 100);
+                $data['product_taxrate_' . $i] = 21 * 100;
             }
         }
 
