@@ -43,7 +43,7 @@ class PurchaseRequest extends AbstractRequest
 
     public function getMakeInvoice()
     {
-        return $this->getParameter('makeInvoice') ?: 'true';
+        return $this->getParameter('makeInvoice');
     }
 
     public function setMakeInvoice($value)
@@ -53,7 +53,7 @@ class PurchaseRequest extends AbstractRequest
 
     public function getMailInvoice()
     {
-        return $this->getParameter('mailInvoice') ?: 'true';
+        return $this->getParameter('mailInvoice');
     }
 
     public function setMailInvoice($value)
@@ -110,7 +110,7 @@ class PurchaseRequest extends AbstractRequest
             'notifyUrl'
         );
 
-        if (!$this->getTestMode() && $this->getIssuer() == 99) {
+        if ( ! $this->getTestMode() && $this->getIssuer() == 99) {
             throw new InvalidRequestException("The issuer can only be '99' in testMode!");
         }
 
@@ -151,8 +151,12 @@ class PurchaseRequest extends AbstractRequest
                 $data['billing_country'] = $card->getBillingCountry();
                 $data['billing_phone'] = $card->getBillingPhone();
                 $data['birthdate'] = date('dmY', strtotime($card->getBirthday()));
-                $data['makeinvoice'] = $this->getMakeInvoice();
-                $data['mailinvoice'] = $this->getMailInvoice();
+                if ($this->getMakeInvoice()) {
+                    $data['makeinvoice'] = $this->getMakeInvoice();
+                }
+                if ($this->getMailInvoice()) {
+                    $data['mailinvoice'] = $this->getMailInvoice();
+                }
                 $data['billing_countrycode'] = $this->getBillingCountrycode();
                 $data['shipping_countrycode'] = $this->getShippingCountrycode();
 
