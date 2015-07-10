@@ -110,7 +110,7 @@ class PurchaseRequest extends AbstractRequest
             'notifyUrl'
         );
 
-        if ( ! $this->getTestMode() && $this->getIssuer() == 99) {
+        if (!$this->getTestMode() && $this->getIssuer() == 99) {
             throw new InvalidRequestException("The issuer can only be '99' in testMode!");
         }
 
