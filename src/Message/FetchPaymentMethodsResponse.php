@@ -10,7 +10,7 @@ class FetchPaymentMethodsResponse extends BaseAbastractResponse implements Fetch
 {
     protected $names = array(
         'ideal' => 'iDEAL',
-        'ecare' => 'ecare',
+        'klarna' => 'Klarna factuur (achteraf betalen)',
         'ebill' => 'ebill',
         'overboeking' => 'Overboeking',
         'sofort' => 'DIRECTebanking/SofortBanking',
