@@ -188,18 +188,17 @@ class PurchaseRequest extends AbstractRequest
 
         if ($items) {
             foreach ($items as $i => $item) {
-                $data['product_id_' . $i] = $item->getName();
-                $data['product_description_' . $i] = $item->getDescription();
-                $data['product_quantity_' . $i] = $item->getQuantity();
-                $data['product_netprice_' . $i] = ceil($this->formatCurrency($item->getPrice()) * 100);
-                $data['product_total_' . $i] = ceil(
-                    $this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100
-                );
-                $data['product_nettotal_' . $i] = ceil(
-                    ($this->formatCurrency($item->getPrice()) / 121 * 100) * $item->getQuantity() * 100
-                ); //@todo fix tax rates
-                $data['product_tax_' . $i] = ceil(($this->formatCurrency($item->getPrice()) / 121 * 21) * 100);
-                $data['product_taxrate_' . $i] = 21 * 100;
+                $x = $i + 1;
+                $data['product_id_' . $x] = $item->getName();
+                $data['product_description_' . $x] = $item->getDescription();
+                $data['product_quantity_' . $x] = $item->getQuantity();
+                $data['product_netprice_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 100) * 100);
+                $data['product_total_' . $x] = round($this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100);
+                $data['product_nettotal_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 100) * $item->getQuantity() * 100);
+
+                //@todo fix tax rates
+                $data['product_tax_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 21) * 100);
+                $data['product_taxrate_' . $x] = 21 * 100;
             }
         }
 
