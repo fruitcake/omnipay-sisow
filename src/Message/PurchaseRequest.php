@@ -193,8 +193,12 @@ class PurchaseRequest extends AbstractRequest
                 $data['product_description_' . $x] = $item->getDescription();
                 $data['product_quantity_' . $x] = $item->getQuantity();
                 $data['product_netprice_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 100) * 100);
-                $data['product_total_' . $x] = round($this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100);
-                $data['product_nettotal_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 100) * $item->getQuantity() * 100);
+                $data['product_total_' . $x] = round(
+                    $this->formatCurrency($item->getPrice()) * $item->getQuantity() * 100
+                );
+                $data['product_nettotal_' . $x] = round(
+                    ($this->formatCurrency($item->getPrice()) / 121 * 100) * $item->getQuantity() * 100
+                );
 
                 //@todo fix tax rates
                 $data['product_tax_' . $x] = round(($this->formatCurrency($item->getPrice()) / 121 * 21) * 100);
