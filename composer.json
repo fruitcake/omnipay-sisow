@@ -24,10 +24,13 @@
         "psr-4": { "Omnipay\\Sisow\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "~2.2"
+        "omnipay/common": "dev-3.0-simple",
+        "php-http/client-implementation": "^1.0",
+        "php-http/message": "^1.4",
+        "php-http/discovery": "^1.1"
     },
-        "require-dev": {
-        "omnipay/tests": "~2.0"
+    "require-dev": {
+        "omnipay/tests": "dev-3.0-simple"
     },
     "extra": {
         "branch-alias": {

@@ -2,6 +2,8 @@
 
 namespace Omnipay\Sisow\Message;
 
+use Omnipay\Common\Http\Decoder;
+
 class CompletePurchaseRequest extends PurchaseRequest
 {
     protected $endpoint = 'https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/StatusRequest';
@@ -45,8 +47,8 @@ class CompletePurchaseRequest extends PurchaseRequest
     public function sendData($data)
     {
         if ($data['trxid']) {
-            $httpResponse = $this->httpClient->post($this->endpoint, null, $data)->send();
-            return $this->response = new CompletePurchaseResponse($this, $httpResponse->xml());
+            $httpResponse = $this->httpClient->post($this->endpoint, [], http_build_query($data));
+            return $this->response = new CompletePurchaseResponse($this, Decoder::xml($httpResponse));
         } else {
             $data = array('transaction' => (object) $this->httpRequest->query->all());
             return $this->response = new CompletePurchaseResponse($this, (object) $data);
