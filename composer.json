@@ -24,17 +24,22 @@
         "psr-4": { "Omnipay\\Sisow\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "dev-3.0-simple",
-        "php-http/client-implementation": "^1.0",
-        "php-http/message": "^1.4",
-        "php-http/discovery": "^1.1"
+        "omnipay/common": "^3"
     },
     "require-dev": {
-        "omnipay/tests": "dev-3.0-simple"
+        "omnipay/tests": "^3",
+        "squizlabs/php_codesniffer": "^2.8.1"
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.0.x-dev"
+            "dev-master": "3.0.x-dev"
         }
-    }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs -p --standard=PSR2 src/",
+        "fix-style": "phpcbf -p --standard=PSR2 src/"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
