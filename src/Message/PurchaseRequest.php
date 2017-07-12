@@ -86,15 +86,9 @@ class PurchaseRequest extends AbstractRequest
      */
     protected function generateSignature()
     {
-        if ($this->getPaymentMethod() == 'klarna') {
-            return sha1(
-                $this->getTransactionId() . $this->getEntranceCode() . $this->getAmountInteger() .
-                $this->getShopId() . $this->getMerchantId() . $this->getMerchantKey()
-            );
-        }
         return sha1(
-            $this->getTransactionId() . $this->getEntranceCode() .
-            $this->getAmountInteger() . $this->getMerchantId() . $this->getMerchantKey()
+            $this->getTransactionId() . $this->getEntranceCode() . $this->getAmountInteger() .
+            $this->getShopId() . $this->getMerchantId() . $this->getMerchantKey()
         );
     }
 
