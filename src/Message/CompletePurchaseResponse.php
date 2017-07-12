@@ -31,7 +31,7 @@ class CompletePurchaseResponse extends PurchaseResponse
         if ($status = $this->getStatus()) {
             return $status;
         } elseif (!is_null($this->code)) {
-            return $this->data;
+            return $this->message;
         }
 
         return null;
