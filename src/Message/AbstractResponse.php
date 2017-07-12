@@ -12,6 +12,11 @@ abstract class AbstractResponse extends BaseAbstractResponse
      * @var string
      */
     protected $code;
+    
+    /**
+     * @var string
+     */
+    protected $message;
 
     /**
      * {@inheritdoc}
@@ -22,7 +27,7 @@ abstract class AbstractResponse extends BaseAbstractResponse
 
         if (isset($this->data->error)) {
             $this->code = (string) $this->data->error->errorcode;
-            $this->data = (string) $this->data->error->errormessage;
+            $this->message = (string) $this->data->error->errormessage;
         }
     }
 
@@ -32,7 +37,7 @@ abstract class AbstractResponse extends BaseAbstractResponse
     public function getMessage()
     {
         if (!$this->isSuccessful()) {
-            return $this->data;
+            return $this->message;
         }
 
         return null;
