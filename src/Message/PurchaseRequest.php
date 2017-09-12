@@ -3,7 +3,7 @@
 namespace Omnipay\Sisow\Message;
 
 use Omnipay\Common\Exception\InvalidRequestException;
-use Omnipay\Common\Http\Decoder;
+use Omnipay\Common\Http\ResponseParser;
 
 /**
  * Sisow Purchase Request
@@ -211,6 +211,6 @@ class PurchaseRequest extends AbstractRequest
     {
         $httpResponse = $this->httpClient->post($this->endpoint, [], http_build_query($data));
 
-        return $this->response = new PurchaseResponse($this, Decoder::xml($httpResponse));
+        return $this->response = new PurchaseResponse($this, ResponseParser::xml($httpResponse));
     }
 }
