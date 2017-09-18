@@ -2,8 +2,7 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Helper;
-use Omnipay\Common\Http\Decoder;
+use Omnipay\Common\Http\ResponseParser;
 
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
@@ -42,6 +41,6 @@ class FetchPaymentMethodsRequest extends AbstractRequest
     {
         $httpResponse = $this->httpClient->post($this->endpoint, [], http_build_query($data));
 
-        return $this->response = new FetchPaymentMethodsResponse($this, Decoder::xml($httpResponse));
+        return $this->response = new FetchPaymentMethodsResponse($this, ResponseParser::xml($httpResponse));
     }
 }

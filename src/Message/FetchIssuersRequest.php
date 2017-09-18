@@ -2,7 +2,7 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Http\Decoder;
+use Omnipay\Common\Http\ResponseParser;
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
 class FetchIssuersRequest extends BaseAbstractRequest
@@ -29,6 +29,6 @@ class FetchIssuersRequest extends BaseAbstractRequest
 
         $httpResponse = $this->httpClient->get($endpoint);
 
-        return $this->response = new FetchIssuersResponse($this, Decoder::xml($httpResponse));
+        return $this->response = new FetchIssuersResponse($this, ResponseParser::xml($httpResponse));
     }
 }
