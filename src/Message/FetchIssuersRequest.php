@@ -5,7 +5,7 @@ namespace Omnipay\Sisow\Message;
 use Omnipay\Common\Http\ResponseParser;
 use Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
 
-class FetchIssuersRequest extends BaseAbstractRequest
+class FetchIssuersRequest extends AbstractRequest
 {
     protected $endpoint = 'https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/DirectoryRequest';
 
@@ -27,8 +27,8 @@ class FetchIssuersRequest extends BaseAbstractRequest
             $endpoint .= '?test=true';
         }
 
-        $httpResponse = $this->httpClient->get($endpoint);
+        $httpResponse = $this->httpClient->request('GET', $endpoint);
 
-        return $this->response = new FetchIssuersResponse($this, ResponseParser::xml($httpResponse));
+        return $this->response = new FetchIssuersResponse($this, $this->parseXmlResponse($httpResponse));
     }
 }

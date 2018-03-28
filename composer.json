@@ -24,7 +24,7 @@
         "psr-4": { "Omnipay\\Sisow\\" : "src/" }
     },
     "require": {
-        "omnipay/common": "^3"
+        "omnipay/common": "v3.0-alpha.4"
     },
     "require-dev": {
         "omnipay/tests": "^3",

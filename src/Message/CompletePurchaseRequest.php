@@ -3,6 +3,7 @@
 namespace Omnipay\Sisow\Message;
 
 use Omnipay\Common\Http\ResponseParser;
+use Psr\Http\Message\ResponseInterface;
 
 class CompletePurchaseRequest extends PurchaseRequest
 {
@@ -48,8 +49,8 @@ class CompletePurchaseRequest extends PurchaseRequest
     public function sendData($data)
     {
         if ($data['trxid']) {
-            $httpResponse = $this->httpClient->post($this->endpoint, [], http_build_query($data));
-            return $this->response = new CompletePurchaseResponse($this, ResponseParser::xml($httpResponse));
+            $httpResponse = $this->httpClient->request('POST', $this->endpoint, [], http_build_query($data));
+            return $this->response = new CompletePurchaseResponse($this, $this->parseXmlResponse($httpResponse));
         } else {
             $data = array('transaction' => (object) $this->httpRequest->query->all());
             return $this->response = new CompletePurchaseResponse($this, (object) $data);

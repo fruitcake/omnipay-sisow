@@ -3,6 +3,7 @@
 namespace Omnipay\Sisow\Message;
 
 use \Omnipay\Common\Message\AbstractRequest as BaseAbstractRequest;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Sisow Abstract Request
@@ -12,9 +13,12 @@ abstract class AbstractRequest extends BaseAbstractRequest
     /**
      * Generate the message signature
      *
-     * @return string
+     * @return string|null
      */
-    abstract protected function generateSignature();
+    protected function generateSignature()
+    {
+        return null;
+    }
     
     public function getMerchantId()
     {
@@ -44,5 +48,14 @@ abstract class AbstractRequest extends BaseAbstractRequest
     public function setShopId($value)
     {
         return $this->setParameter('shopId', $value);
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return \SimpleXMLElement
+     */
+    protected function parseXmlResponse(ResponseInterface $response)
+    {
+        return simplexml_load_string($response->getBody()->getContents());
     }
 }
