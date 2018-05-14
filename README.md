@@ -7,25 +7,15 @@
 [![Total Downloads](https://poser.pugx.org/fruitcakestudio/omnipay-sisow/d/total.png)](https://packagist.org/packages/fruitcakestudio/omnipay-sisow)
 
 [Omnipay](https://github.com/omnipay/omnipay) is a framework agnostic, multi-gateway payment
-processing library for PHP 5.3+. This package implements Sisow support for Omnipay.
+processing library for PHP. This package implements Sisow support for Omnipay.
 
 ## Installation
 
-Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply add it
-to your `composer.json` file:
+Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply require `omnipay/omnipay` and `fruitcakestudio/omnipay-sisow` with Composer:
 
-```json
-{
-    "require": {
-        "fruitcakestudio/omnipay-sisow": "~2.0"
-    }
-}
 ```
-
-And run composer to update your dependencies:
-
-    $ curl -s http://getcomposer.org/installer | php
-    $ php composer.phar update
+composer require omnipay/omnipay fruitcakestudio/omnipay-sisow
+```
 
 ## Basic Usage
 
