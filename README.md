@@ -14,7 +14,7 @@ processing library for PHP. This package implements Sisow support for Omnipay.
 Omnipay is installed via [Composer](http://getcomposer.org/). To install, simply require `league/omnipay` and `fruitcakestudio/omnipay-sisow` with Composer:
 
 ```
-composer require league/omnipay fruitcakestudio/omnipay-sisow
+composer require league/omnipay noud/omnipay-sisow
 ```
 
 ## Basic Usage

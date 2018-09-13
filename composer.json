@@ -1,5 +1,5 @@
 {
-    "name": "fruitcakestudio/omnipay-sisow",
+    "name": "noud/omnipay-sisow",
     "description": "Sisow gateway for the Omnipay payment processing library",
     "keywords": [
         "gateway",
