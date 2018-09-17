@@ -214,7 +214,6 @@ class PurchaseRequest extends AbstractRequest
             $this->endpoint,
             [
                 'Content-Type' => 'application/x-www-form-urlencoded'
-                
             ],
             http_build_query($data)
         );

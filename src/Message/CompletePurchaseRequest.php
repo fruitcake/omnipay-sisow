@@ -54,7 +54,6 @@ class CompletePurchaseRequest extends PurchaseRequest
                 $this->endpoint,
                 [
                     'Content-Type' => 'application/x-www-form-urlencoded'
-                    
                 ],
                 http_build_query($data)
             );
