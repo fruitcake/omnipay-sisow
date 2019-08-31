@@ -2,8 +2,6 @@
 
 namespace Omnipay\Sisow\Message;
 
-use Omnipay\Common\Http\ResponseParser;
-
 class FetchPaymentMethodsRequest extends AbstractRequest
 {
     protected $endpoint = 'https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/CheckMerchantRequest';
@@ -39,7 +37,14 @@ class FetchPaymentMethodsRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $httpResponse = $this->httpClient->request('POST', $this->endpoint, [], http_build_query($data));
+        $httpResponse = $this->httpClient->request(
+            'POST',
+            $this->endpoint,
+            [
+                'Content-Type' => 'application/x-www-form-urlencoded',
+            ],
+            http_build_query($data)
+        );
 
         return $this->response = new FetchPaymentMethodsResponse($this, $this->parseXmlResponse($httpResponse));
     }
