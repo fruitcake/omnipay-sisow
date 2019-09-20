@@ -2,9 +2,14 @@
 
 namespace Omnipay\Sisow;
 
+use Omnipay\Sisow\Message\CaptureRequest;
+use Omnipay\Sisow\Message\CreditRequest;
+use Omnipay\Sisow\Message\FetchTransactionRequest;
+use Omnipay\Sisow\Message\RefundRequest;
+use Omnipay\Sisow\Message\VoidRequest;
 use Omnipay\Tests\GatewayTestCase;
 
-class IdealGatewayTest extends GatewayTestCase
+class GatewayTest extends GatewayTestCase
 {
     /**
      * @var Gateway
@@ -60,5 +65,45 @@ class IdealGatewayTest extends GatewayTestCase
 
         $this->assertInstanceOf('Omnipay\Sisow\Message\CompletePurchaseRequest', $request);
         $this->assertSame('123456', $request->getTransactionId());
+    }
+
+    public function testCapture()
+    {
+        $request = $this->gateway->capture(['transactionId' => '123456']);
+
+        self::assertInstanceOf(CaptureRequest::class, $request);
+        self::assertSame('123456', $request->getTransactionId());
+    }
+
+    public function testVoid()
+    {
+        $request = $this->gateway->void(['transactionId' => '123456']);
+
+        self::assertInstanceOf(VoidRequest::class, $request);
+        self::assertSame('123456', $request->getTransactionId());
+    }
+
+    public function testCredit()
+    {
+        $request = $this->gateway->credit(['transactionId' => '123456']);
+
+        self::assertInstanceOf(CreditRequest::class, $request);
+        self::assertSame('123456', $request->getTransactionId());
+    }
+
+    public function testRefund()
+    {
+        $request = $this->gateway->refund(['transactionId' => '123456']);
+
+        self::assertInstanceOf(RefundRequest::class, $request);
+        self::assertSame('123456', $request->getTransactionId());
+    }
+
+    public function testFetchTransaction()
+    {
+        $request = $this->gateway->fetchTransaction(['transactionId' => '123456']);
+
+        self::assertInstanceOf(FetchTransactionRequest::class, $request);
+        self::assertSame('123456', $request->getTransactionId());
     }
 }

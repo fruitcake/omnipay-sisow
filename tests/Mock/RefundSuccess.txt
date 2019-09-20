@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Date: Mon, 14 Jul 2014 14:25:11 GMT
+
+<?xml version="1.0" encoding="UTF-8"?>
+<refundresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0">
+    <refund>
+        <refundid>123456</refundid>
+    </refund>
+    <signature>
+        <sha1>71dd07494c5ee54992a27746d547e25dee01bd97</sha1>
+    </signature>
+</refundresponse>

@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Date: Mon, 14 Jul 2014 14:25:11 GMT
+
+<?xml version="1.0" encoding="UTF-8"?>
+<creditinvoiceresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0">
+    <creditinvoice>
+        <invoiceno>123456</invoiceno>
+        <documentid>987654</documentid>
+    </creditinvoice>
+    <signature>
+        <sha1>3c23139675a9394dabe51a239d3a3ed359540ec9</sha1>
+    </signature>
+</creditinvoiceresponse>

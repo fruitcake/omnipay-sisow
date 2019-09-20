@@ -1,0 +1,14 @@
+HTTP/1.1 200 OK
+Cache-Control: private
+Content-Type: text/xml; charset=utf-8
+Date: Mon, 14 Jul 2014 14:25:11 GMT
+
+<?xml version="1.0" encoding="UTF-8"?>
+<cancelreservationresponse xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0">
+    <reservation>
+        <status>Cancelled</status>
+    </reservation>
+    <signature>
+        <sha1>4e44e957d9fffea86e98eded777cfcb71f34afec</sha1>
+    </signature>
+</cancelreservationresponse>
