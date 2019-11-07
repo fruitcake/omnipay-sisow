@@ -12,6 +12,13 @@ class PurchaseRequest extends AbstractRequest
 {
     protected $endpoint = 'https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/TransactionRequest';
 
+    /**
+     * Line negative amount needed for Afterpay/Billink/Klarna/Focum transactions (discounts etc.)
+     *
+     * @var bool
+     */
+    protected $negativeAmountAllowed = true;
+
     public function getDays()
     {
         return $this->getParameter('days');
