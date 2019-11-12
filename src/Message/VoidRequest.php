@@ -27,7 +27,7 @@ class VoidRequest extends AbstractRequest
      *
      * @throws InvalidRequestException
      */
-    public function getData(): array
+    public function getData()
     {
         $this->validate('transactionId', 'merchantId', 'merchantKey');
 
